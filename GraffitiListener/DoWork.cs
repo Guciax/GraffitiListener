@@ -16,7 +16,6 @@ namespace GraffitiListener
             tasksList.Add(Task.Run(() => GetMesOrders()));
             tasksList.Add(Task.Run(() => GetGraffitiOrders()));
             await Task.WhenAll(tasksList).ConfigureAwait(false);
-
             Synchronize();
         }
 
@@ -27,7 +26,7 @@ namespace GraffitiListener
 
         private static void GetGraffitiOrders()
         {
-            throw new NotImplementedException();
+            GraffitiOrders = GraffitiOrdersLoader.GetGraffitiOrdersFromDb();
         }
 
         private static void GetMesOrders()
