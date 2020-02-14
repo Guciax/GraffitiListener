@@ -9,13 +9,14 @@ namespace GraffitiListener
     {
         private static IEnumerable<OrderStruct> MesOrders { get; set; }
         private static IEnumerable<OrderStruct> GraffitiOrders { get; set; }
-
-        public static async Task SyncOrders()
+        public static void SyncOrders()
         {
-            List<Task> tasksList = new List<Task>();
-            tasksList.Add(Task.Run(() => GetMesOrders()));
-            tasksList.Add(Task.Run(() => GetGraffitiOrders()));
-            await Task.WhenAll(tasksList).ConfigureAwait(false);
+            //List<Task> tasksList = new List<Task>();
+            //tasksList.Add(Task.Run(() => GetMesOrders()));
+            //tasksList.Add(Task.Run(() => GetGraffitiOrders()));
+            var g = GraffitiOrdersLoader.GetGraffitiOrdersFromDb().ToList();
+            var mg = MesOrdersLoader.LoadMesOrders().ToList();
+            //await Task.WhenAll(tasksList).ConfigureAwait(false);
             Synchronize();
         }
 
